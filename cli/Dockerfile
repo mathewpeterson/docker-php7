@@ -2,7 +2,7 @@ FROM php:7-cli
 
 MAINTAINER Mathew Peterson <mathewpeterson@me.com>
 
-COPY ../bin/* /usr/local/bin/
+COPY bin/* /usr/local/bin/
 
 RUN apt-install \
     apt-utils \
