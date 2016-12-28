@@ -5,15 +5,15 @@ services:
 
 variables:
   IMAGE_NAME: mathewpeterson/php7
-  IMAGE_TAG_CLI: $IMAGE_NAME:cli
-  IMAGE_TAG_FPM: $IMAGE_NAME:fpm
+  IMAGE_TAG_CLI: ${IMAGE_NAME}:cli
+  IMAGE_TAG_FPM: ${IMAGE_NAME}:fpm
 
 before_script:
   - docker info
 
 stages:
   - build
-  # - test
+  - test
   # - release
   # - deploy
 
@@ -21,12 +21,12 @@ build-cli:
   stage: build
   script:
   - docker build --pull -t $IMAGE_TAG_CLI ./cli
-#
-# test-cli:
-#   stage: test
-#   script:
-#     - docker run $IMAGE_TAG_CLI php -v
-#
+
+test-cli:
+  stage: test
+  script:
+    - docker run $IMAGE_TAG_CLI php -v
+
 # release-cli:
 #   stage: release
 #   script:
