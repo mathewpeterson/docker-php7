@@ -1,0 +1,36 @@
+image: docker:latest
+
+variables:
+  IMAGE_NAME: mathewpeterson/php7
+  IMAGE_TAG_CL: $IMAGE_NAME:cli
+  IMAGE_TAG_FPM: $IMAGE_NAME:fpm
+
+before_script:
+- docker info
+
+stages:
+  - build
+  - test
+  # - release
+  # - deploy
+
+build-cli:
+  stage: build
+  script:
+  - docker build -t $IMAGE_TAG_CLI ./cli
+
+test-cli:
+  stage: test
+  script:
+    - docker run $IMAGE_TAG_CLI php -v
+
+release-cli:
+  stage: release
+  script:
+    - docker
+
+deploy-cli:
+  stage: deploy
+  script:
+    - docker login -u "$DOCKER_HUB_USERNAME" -p "$DOCKER_HUB_PASSWORD"
+    - docker push "$IMAGE_TAG_CLI"
