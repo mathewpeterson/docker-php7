@@ -11,8 +11,8 @@ before_script:
 stages:
   - build
   - test
-  # - release
-  # - deploy
+  - release
+  - deploy
 
 build-cli:
   stage: build
