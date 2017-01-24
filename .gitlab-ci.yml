@@ -9,29 +9,30 @@ variables:
   IMAGE_TAG_FPM: ${IMAGE_NAME}:fpm
 
 before_script:
+  - env | sort
   - docker info
+  - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
 stages:
   - build
   - test
-  # - release
-  # - deploy
+  - release
 
 build-cli:
   stage: build
   script:
-  - docker build --pull -t $IMAGE_TAG_CLI ./cli
+  - cd ./cli && docker build --pull -t $IMAGE_TAG_CLI .
 
 test-cli:
   stage: test
   script:
     - docker run $IMAGE_TAG_CLI php -v
 
-# release-cli:
-#   stage: release
-#   script:
-#     - docker
-#
+release-cli:
+  stage: release
+  script:
+    - docker push $IMAGE_TAG_CLI
+
 # deploy-cli:
 #   stage: deploy
 #   script:
