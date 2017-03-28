@@ -11,7 +11,6 @@ variables:
 before_script:
   - env | sort
   - docker info
-  - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
 stages:
   - build
@@ -21,22 +20,16 @@ stages:
 build-cli:
   stage: build
   script:
-  - cd ./cli && docker build --pull -t $IMAGE_TAG_CLI .
+  - ./ci/build.sh cli
 
 test-cli:
   stage: test
   script:
-    - docker run $IMAGE_TAG_CLI php -v
+    - ./ci/test.sh cli
 
-release-cli:
-  stage: release
-  script:
-    - docker push $IMAGE_TAG_CLI
+# release-cli:
+#  stage: release
+#  script:
+#    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+#    - docker push $IMAGE_TAG_CLI
 
-# deploy-cli:
-#   stage: deploy
-#   script:
-#     - docker login -u "$DOCKER_HUB_USERNAME" -p "$DOCKER_HUB_PASSWORD"
-#     - docker push "$IMAGE_TAG_CLI"
-#   only:
-#     - master
