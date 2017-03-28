@@ -4,7 +4,7 @@ set -e
 
 TARGET=$1
 
-source ./common.sh
+source $(dirname "$0")/common.sh
 
 cd $TARGET && docker build -t $IMAGE_TAG .
 
