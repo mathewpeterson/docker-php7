@@ -1,4 +1,4 @@
-FROM php:7.1.3-fpm
+FROM php:7.1.4-fpm
 
 MAINTAINER Mathew Peterson <mathewpeterson@me.com>
 

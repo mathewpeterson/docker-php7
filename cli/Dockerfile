@@ -1,4 +1,4 @@
-FROM php:7.1.3-cli
+FROM php:7.1.4-cli
 
 MAINTAINER Mathew Peterson <mathewpeterson@me.com>
 

@@ -20,7 +20,7 @@ stages:
 build-cli:
   stage: build
   script:
-  - ./ci/build.sh cli
+    - ./ci/build.sh cli
 
 test-cli:
   stage: test
@@ -32,4 +32,3 @@ test-cli:
 #  script:
 #    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 #    - docker push $IMAGE_TAG_CLI
-
